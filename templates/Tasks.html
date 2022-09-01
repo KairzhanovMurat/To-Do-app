@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body class="container">
+
+<form action="" method="get">
+    <input type="text" name="search" placeholder="search here..." value="{{ search_input }}">
+    <input type="submit" value="go" class="btn-btn-danger">
+</form>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.title }}
+    <input type="submit" class="btn-btn-success" value="add task">
+</form>
+<ol>
+ {% for task in tasks %}
+     <li><div class="jumbotron"> <em>{{ task.title|title }}</em> <em><a href="{% url 'Tasks:del' id=task.id %}">Delete</a></em></div> </li>
+{% empty %}
+<h2>No tasks yet</h2>
+{% endfor %}
+</ol>
+</body>
+</html>
